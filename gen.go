@@ -46,6 +46,24 @@ func {{$name}}(ok bool, truthy, falsey {{$type}}) {{$type}} {
 }
 {{end}}`
 
+// Cause maps are hard!!!
+func genMaps() map[string]string {
+	set := make(map[string]string)
+	for keyName, keyType := range types {
+		for valName, valType := range types {
+			set["Map"+keyName+"To"+valName] = "map[" + keyType + "]" + valType
+		}
+	}
+	return set
+}
+
+// for Array, Slice, Chan, Ptr
+func genPrefix(namePrefix, typePrefix string, sideMap map[string]string) {
+	for name, typ := range types {
+		sideMap[namePrefix+name] = typePrefix + typ
+	}
+}
+
 func do(err error) {
 	if err != nil {
 		panic(err)
@@ -53,6 +71,19 @@ func do(err error) {
 }
 
 func main() {
+	// Generate multiples of core types
+	additions := genMaps()
+	genPrefix("Array", "[]", additions)
+	genPrefix("Slice", "[]", additions)
+	genPrefix("Chan", "chan ", additions)
+	genPrefix("ChanSend", "chan<- ", additions)
+	genPrefix("ChanRecv", "<-chan ", additions)
+	genPrefix("Ptr", "*", additions)
+	for name, typ := range additions {
+		types[name] = typ
+	}
+
+	// Print that dark magic to a file
 	tpl := template.Must(template.New("").Parse(pattern))
 	file, err := os.Create("ternary.go")
 	do(err)
