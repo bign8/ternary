@@ -1,4 +1,5 @@
 // This file has been generated with: go run gen.go; DO NOT EDIT!
+
 package ternary
 
 import "unsafe"

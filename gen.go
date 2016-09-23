@@ -32,6 +32,7 @@ var types = map[string]string{
 }
 
 var pattern = `// This file has been generated with: go run gen.go; DO NOT EDIT!
+
 package ternary
 
 import "unsafe"
