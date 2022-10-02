@@ -1,5 +1,4 @@
-# name: GitHub Actions Demo
-# run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Push
 on: [push]
 jobs:
   Verify:
@@ -9,5 +8,13 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '>=1.18.0'
-      - run: go version
-      - run: go test ./...
+
+      - name: Unit Tests
+        run: go test -v ./...
+
+      - name: Verify generated code
+        run: |
+          cp ternary.go duplicate
+          go generate
+          diff -cs ternary.go duplicate
+          rm duplicate
