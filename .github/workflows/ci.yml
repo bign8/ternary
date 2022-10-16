@@ -1,0 +1,18 @@
+name: Push
+on: [push]
+jobs:
+  Verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.18.0'
+      - name: Unit Tests
+        run: go test -v ./...
+      - name: Verify generated code
+        run: |
+          cp ternary.go duplicate
+          go generate
+          diff -cs ternary.go duplicate
+          rm duplicate
