@@ -1,8 +1,6 @@
 # Ternary
-[![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)](http://www.wtfpl.net/faq/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/bign8/ternary)](https://goreportcard.com/report/github.com/bign8/ternary)
-[![GoDoc](https://godoc.org/github.com/bign8/ternary?status.svg)](https://godoc.org/github.com/bign8/ternary)
-[![Build Status](https://travis-ci.org/bign8/ternary.svg?branch=master)](https://travis-ci.org/bign8/ternary)
+[![GoDoc](https://pkg.go.dev/badge/github.com/bign8/ternary)](https://pkg.go.dev/github.com/bign8/ternary)
 
 Providing you with your much needed ternary operators in go since 2016.
 
